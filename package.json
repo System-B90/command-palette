@@ -1,0 +1,76 @@
+{
+    "name": "@system-b90/command-palette",
+    "version": "0.1.0",
+    "description": "VSCode-style command palette for MUI apps: contribution registry, fuzzy matcher, recents ranking, and an accessible RTL-aware dialog",
+    "license": "UNLICENSED",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/System-B90/command-palette.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
+    "type": "module",
+    "sideEffects": false,
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
+        "./core": {
+            "types": "./dist/core/index.d.ts",
+            "default": "./dist/core/index.js"
+        },
+        "./en": {
+            "types": "./dist/labels/en.d.ts",
+            "default": "./dist/labels/en.js"
+        },
+        "./he": {
+            "types": "./dist/labels/he.d.ts",
+            "default": "./dist/labels/he.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+        "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+        "pretest": "npm run build",
+        "test": "node --experimental-strip-types --test tests/*.test.ts",
+        "lint": "eslint .",
+        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "docs:api": "typedoc",
+        "docs:build": "python -m mkdocs build",
+        "docs:serve": "python -m mkdocs serve"
+    },
+    "peerDependencies": {
+        "@mui/icons-material": "^7.0.0",
+        "@mui/material": "^7.0.0",
+        "react": "^18.0.0 || ^19.0.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.5",
+        "@mui/icons-material": "^7.3.6",
+        "@mui/material": "^7.3.6",
+        "@stylistic/eslint-plugin": "^5.10.0",
+        "@types/node": "^20",
+        "@types/react": "^19.2.17",
+        "eslint": "^9.39.5",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-perfectionist": "^5.10.0",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^7.1.1",
+        "eslint-plugin-unicorn": "^64.0.0",
+        "eslint-plugin-unused-imports": "^4.4.1",
+        "globals": "^17.8.0",
+        "react": "^19.2.8",
+        "tsc-alias": "^1.9.1",
+        "typedoc": "^0.28.20",
+        "typedoc-plugin-markdown": "^4.12.0",
+        "typescript": "^5.9.0",
+        "typescript-eslint": "^8.63.0"
+    }
+}
