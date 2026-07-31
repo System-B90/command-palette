@@ -3,8 +3,7 @@
 # `!cancelled()` so a lint failure still doesn't hide a test failure, but they
 # share one checkout and one `npm ci`.
 #
-# Unlike Bluz this runs on GitHub-hosted runners: there is no Docker build, no
-# Hive stack and no Python here, so nothing needs the self-hosted box.
+# Runs on the org's self-hosted runner, same box as Bluz's pipeline.
 name: Verify
 
 on:
@@ -21,7 +20,7 @@ concurrency:
 jobs:
     verify:
         name: Lint + Typecheck + Unit Tests
-        runs-on: ubuntu-24.04
+        runs-on: self-hosted
         timeout-minutes: 15
         # Dependabot PRs are single dep bumps; CI on them wastes runner
         # minutes. Run this only for humans.

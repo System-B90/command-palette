@@ -1,5 +1,4 @@
-# Ported from Bluz's docs workflow. Runs on GitHub-hosted runners rather than
-# the self-hosted box — there is no Docker build or Hive stack involved here.
+# Ported from Bluz's docs workflow, self-hosted runner included.
 name: Deploy Documentation
 
 on:
@@ -20,7 +19,7 @@ permissions:
 jobs:
   build:
     name: Build Documentation
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     timeout-minutes: 15
     steps:
       - name: Checkout repository
@@ -60,7 +59,7 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     timeout-minutes: 10
     environment:
       name: github-pages
