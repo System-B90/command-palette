@@ -20,7 +20,7 @@ concurrency:
 jobs:
     verify:
         name: Lint + Typecheck + Unit Tests
-        runs-on: self-hosted
+        runs-on: [self-hosted, node]
         timeout-minutes: 15
         # Dependabot PRs are single dep bumps; CI on them wastes runner
         # minutes. Run this only for humans.
