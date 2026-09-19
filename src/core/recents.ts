@@ -34,8 +34,13 @@ export class RecentsStore {
     }
 
     /**
-     * Ranking multiplier contribution for `id`: a bounded bonus that decays with
+     * Additive ranking bonus for `id`: a bounded term that decays with
      * position, so it breaks ties without overpowering the text score.
+     *
+     * Added, not multiplied — `rankCommands` computes
+     * `boost(id) + priority * PRIORITY_WEIGHT`, and only `priority` is scaled
+     * by a constant. Recency is a flat additive term, so tuning it does not
+     * scale proportionally with the text score.
      */
     boost(id: CommandId): number {
         const index = this.ids().indexOf(id);

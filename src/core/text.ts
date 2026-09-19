@@ -54,9 +54,16 @@ export function normalizeChars(text: string): Array<string> {
         if (final) return final;
 
         // Decompose, then drop the combining marks, so accented Latin (and any
-        // other mark-using script) folds onto its base letter. Decomposition of
-        // a single precomposed character yields a single base character, which
-        // keeps this array index-aligned with the source string.
+        // other mark-using script) folds onto its base letter.
+        //
+        // Index alignment holds for mark-based scripts -- Latin accents,
+        // Hebrew niqqud -- where decomposition yields one base character plus
+        // marks that this strips. It does not hold universally: NFD on a
+        // Hangul syllable such as "가" yields two base letters (U+1100,
+        // U+1161), neither a combining mark, so that slot carries two
+        // characters and the highlight indices fuzzy.ts derives from this
+        // array drift by one per syllable. Acceptable today because no
+        // consumer ships Hangul titles; revisit if one does.
         return char
             .toLowerCase()
             .normalize("NFD")

@@ -45,7 +45,17 @@ export type Command = {
     /** Defaults to `"command"`. */
     kind?: CommandKind;
     icon?: ReactNode;
-    /** Display-only key hint, e.g. `["Ctrl", "Z"]`. Rendered as chips. */
+    /**
+     * Key hint, e.g. `["Ctrl", "Z"]`. Rendered as chips **and bound as a live
+     * global shortcut** for as long as the command is contributed — declaring
+     * one is enough, no window listener of your own required.
+     *
+     * Because the binding is global, adding a chip changes application
+     * behaviour rather than just the palette's appearance: pick something
+     * unlikely to collide with another contributor's. The binding is skipped
+     * when `enabled === false`, and ignored while the user is typing in an
+     * `input` or `textarea`. See `useCommandHotkeys`.
+     */
     shortcut?: Array<string>;
     /** Rendered greyed-out and non-selectable when `false`. */
     enabled?: boolean;
