@@ -29,7 +29,7 @@ concurrency:
 jobs:
     verify:
         name: Lint + Typecheck + Unit Tests
-        runs-on: ${{ (inputs.runner == 'github-hosted' || vars.CI_RUNNER == 'github-hosted') && 'ubuntu-latest' || fromJSON('["self-hosted", "node"]') }}
+        runs-on: ${{ (inputs.runner == 'github-hosted' || vars.CI_RUNNER == 'github-hosted') && 'ubuntu-latest' || fromJSON('["self-hosted", "Linux", "node"]') }}
         timeout-minutes: 15
         # Dependabot PRs are single dep bumps; CI on them wastes runner
         # minutes. Run this only for humans.
