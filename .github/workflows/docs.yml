@@ -1,5 +1,5 @@
 # Ported from Bluz's docs workflow, self-hosted runner included.
-name: Deploy Documentation
+name: Docs
 
 on:
   push:
