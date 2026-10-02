@@ -1,0 +1,52 @@
+# The single-job shape is
+# deliberate: lint, typecheck and tests each get their own step with
+# `!cancelled()` so a lint failure still doesn't hide a test failure, but they
+# share one checkout and one `npm ci`.
+#
+# Runs on the org's GitHub-hosted runners (the repo is public).
+name: Verify
+
+on:
+    workflow_dispatch:
+    pull_request:
+        branches: ["**"]
+    push:
+        branches: [master, main]
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    verify:
+        name: Lint + Typecheck + Unit Tests
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        # Dependabot PRs are single dep bumps; CI on them wastes runner
+        # minutes. Run this only for humans.
+        if: github.actor != 'dependabot[bot]'
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v7
+
+            - name: Setup Node.js 24
+              uses: actions/setup-node@v6
+              with:
+                  node-version: "24"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run ESLint
+              run: npm run lint
+
+            - name: Typecheck
+              if: ${{ !cancelled() }}
+              run: npm run typecheck
+
+            # `pretest` builds first: the tests import `dist/`, the same entry
+            # point consumers resolve, so a broken emit fails here too.
+            - name: Run unit tests
+              if: ${{ !cancelled() }}
+              run: npm test
