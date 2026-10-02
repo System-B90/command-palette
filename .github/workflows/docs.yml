@@ -1,19 +1,10 @@
-# Ported from Bluz's docs workflow, self-hosted runner included.
+# Ported from Bluz's docs workflow, GitHub-hosted runners (the repo is public).
 name: Docs
 
 on:
   push:
     tags: ['*']
   workflow_dispatch:
-    inputs:
-      runner:
-        description: 'Runner environment to execute on'
-        required: false
-        default: 'self-hosted'
-        type: choice
-        options:
-          - self-hosted
-          - github-hosted
 
 # Only allow one docs deployment at a time
 concurrency:
@@ -28,7 +19,7 @@ permissions:
 jobs:
   build:
     name: Build Documentation
-    runs-on: ${{ (inputs.runner == 'github-hosted' || vars.CI_RUNNER == 'github-hosted') && 'ubuntu-latest' || fromJSON('["self-hosted", "Linux", "node", "python"]') }}
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - name: Checkout repository
@@ -68,7 +59,7 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-    runs-on: ${{ (inputs.runner == 'github-hosted' || vars.CI_RUNNER == 'github-hosted') && 'ubuntu-latest' || fromJSON('["self-hosted", "Linux", "light"]') }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
       name: github-pages

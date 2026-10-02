@@ -2,29 +2,9 @@
 
 ## 1. Install
 
-The package is published to GitHub Packages, so npm needs to know where the
-`@system-b90` scope lives and how to authenticate.
-
-=== "PowerShell"
-
-    ```powershell
-    "@system-b90:registry=https://npm.pkg.github.com" | Out-File -Append $HOME\.npmrc
-    "//npm.pkg.github.com/:_authToken=$env:GITHUB_TOKEN" | Out-File -Append $HOME\.npmrc
-
-    npm install @system-b90/command-palette
-    ```
-
-=== "bash"
-
-    ```bash
-    echo "@system-b90:registry=https://npm.pkg.github.com" >> ~/.npmrc
-    echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> ~/.npmrc
-
-    npm install @system-b90/command-palette
-    ```
-
-The token needs the `read:packages` scope. In CI, `secrets.GITHUB_TOKEN` is
-enough for repositories in the same organisation.
+```sh
+npm install @system-b90/command-palette
+```
 
 !!! note "Peer dependencies"
     `react` (18 or 19), `@mui/material` 7 and `@mui/icons-material` 7 must

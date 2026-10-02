@@ -109,7 +109,7 @@ usually the most used. [Getting Started](getting-started.md) has the details.
 
 ## Lockfile note
 
-`@system-b90/command-palette` must be published to GitHub Packages before
+`@system-b90/command-palette` must be published to npm before
 `npm ci` can resolve it. Until the release lands, install from a locally packed
 tarball (`npm pack` in the package repo, then `npm install --no-save <tgz>`) to
 develop against it — that is how this migration was verified.
