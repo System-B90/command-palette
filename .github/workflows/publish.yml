@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
   id-token: write
+  packages: write
 
 jobs:
   publish:
@@ -31,7 +32,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish (skip if version already on registry)
+      - name: Publish to npm (skip if version already on registry)
         run: |
           name=$(node -p "require('./package.json').name")
           version=$(node -p "require('./package.json').version")
@@ -40,3 +41,22 @@ jobs:
           else
             npm publish --provenance --access public
           fi
+
+      # The apps install the whole @system-b90 scope from GitHub Packages (npm
+      # configures registries per scope, not per package), so every release is
+      # mirrored there as well.
+      - name: Publish to GitHub Packages (skip if version already on registry)
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          reg=https://npm.pkg.github.com
+          auth="--//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}"
+          if npm view "$name@$version" version --@system-b90:registry=$reg $auth >/dev/null 2>&1; then
+            echo "$name@$version already on GitHub Packages, skipping"
+          else
+            npm pkg set publishConfig.registry=$reg
+            npm pkg delete publishConfig.provenance
+            npm publish --@system-b90:registry=$reg $auth
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

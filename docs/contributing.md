@@ -82,7 +82,7 @@ and open a PR.
 | --- | --- | --- |
 | `verify.yml` | PR, push to master, dispatch | Lint → typecheck → tests, each with `if: !cancelled()` so one failure does not mask another. |
 | `docs.yml` | Tags, dispatch | Builds the mkdocs site and deploys to GitHub Pages. |
-| `publish.yml` | GitHub Release, dispatch | Builds and publishes to npm (with provenance); skips if the version is already on the registry. |
+| `publish.yml` | GitHub Release, dispatch | Builds and publishes to npm (with provenance) and mirrors to GitHub Packages; skips if the version is already on the registry. |
 
 ## Releasing
 
