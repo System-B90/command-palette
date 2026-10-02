@@ -2,13 +2,15 @@
     "name": "@system-b90/command-palette",
     "version": "0.1.0",
     "description": "VSCode-style command palette for MUI apps: contribution registry, fuzzy matcher, recents ranking, and an accessible RTL-aware dialog",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/System-B90/command-palette.git"
     },
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "registry": "https://registry.npmjs.org",
+        "access": "public",
+        "provenance": true
     },
     "type": "module",
     "sideEffects": false,

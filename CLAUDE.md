@@ -8,7 +8,7 @@ This file covers what's specific to command-palette.
 ## What command-palette is
 
 The shared VSCode-style command palette, published as
-`@system-b90/command-palette` to GitHub Packages. Consumed by bluz, madash and
+`@system-b90/command-palette` to npm. Consumed by bluz, madash and
 peek-a-boo. Extracted from bluz's `ui/src/components/command-palette/`.
 
 ## The one rule

@@ -16,10 +16,7 @@ accessibility, recipes and the generated API reference. Source in `docs/`.
 
 ## Install
 
-```powershell
-"@system-b90:registry=https://npm.pkg.github.com" | Out-File -Append $HOME\.npmrc
-"//npm.pkg.github.com/:_authToken=$env:GITHUB_TOKEN" | Out-File -Append $HOME\.npmrc
-
+```sh
 npm install @system-b90/command-palette
 ```
 

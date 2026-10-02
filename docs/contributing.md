@@ -6,7 +6,7 @@
 npm ci
 ```
 
-Requires Node 22+ (CI runs 24) and authentication to GitHub Packages only if you
+Requires Node 22+ (CI runs 24) and no registry authentication unless you
 are installing the package elsewhere — this repo itself has no private
 dependencies.
 
@@ -82,7 +82,7 @@ and open a PR.
 | --- | --- | --- |
 | `verify.yml` | PR, push to master, dispatch | Lint → typecheck → tests, each with `if: !cancelled()` so one failure does not mask another. |
 | `docs.yml` | Tags, dispatch | Builds the mkdocs site and deploys to GitHub Pages. |
-| `publish.yml` | GitHub Release, dispatch | Builds and publishes to GitHub Packages; skips if the version is already on the registry. |
+| `publish.yml` | GitHub Release, dispatch | Builds and publishes to npm (with provenance); skips if the version is already on the registry. |
 
 ## Releasing
 
