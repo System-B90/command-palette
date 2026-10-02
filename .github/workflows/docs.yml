@@ -1,4 +1,3 @@
-# Ported from Bluz's docs workflow, GitHub-hosted runners (the repo is public).
 name: Docs
 
 on:

@@ -117,8 +117,8 @@ per-character match indices for highlighting, scoring tuned for short titles, an
 script-specific folding (Hebrew niqqud, gershayim, final forms). ~120 lines is a
 fair trade for owning all three.
 
-It is also **deliberately duplicated** from Bluz's gantt search
-(`components/gantt/curriculum-view/search/fuzzy.ts`). Sharing one implementation
+It is also **deliberately duplicated** from the search code of the app it
+was extracted from. Sharing one implementation
 would couple this package to that app. If the gantt search ever wants this
 matcher, it can import `matchText` from here — that dependency direction is fine.
 
@@ -131,7 +131,7 @@ module reaches a locale table.
 
 ### `@/*` internally, relative externally
 
-Internal imports use the `@/*` alias, mirroring Bluz's convention and enforced by
+Internal imports use the `@/*` alias, enforced by
 `no-restricted-imports`. TypeScript does not rewrite path aliases on emit, so
 `npm run build` runs `tsc-alias` after `tsc`, turning every `@/…` in the emitted
 `.js` and `.d.ts` into a relative specifier. Consumers never see the alias.

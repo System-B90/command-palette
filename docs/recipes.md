@@ -204,4 +204,4 @@ expect(ranked[0].command.id).toBe("schedule.event.new");
 ```
 
 For end-to-end coverage, drive the real thing: open with ++ctrl+k++, type, assert
-on `role="option"` rows. Bluz's `tests/command-palette.spec.ts` is the reference.
+on `role="option"` rows.

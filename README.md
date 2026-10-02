@@ -4,8 +4,7 @@ A VSCode-style command palette for MUI apps: a contribution registry, a fuzzy
 matcher with per-character match highlighting, recency-aware ranking, and an
 accessible, RTL-aware dialog.
 
-Extracted from Bluz's `ui/src/components/command-palette/`. Generic by
-construction — it imports only `react`, `@mui/material` and
+Generic by construction — it imports only `react`, `@mui/material` and
 `@mui/icons-material` (all peer dependencies), and holds no domain knowledge.
 English and Hebrew copy ship with it; only the language you import is built
 into your bundle.
@@ -30,7 +29,7 @@ Peer dependencies: `react` 18 or 19, `@mui/material` 7, `@mui/icons-material` 7.
 import { CommandPaletteProvider } from "@system-b90/command-palette";
 import { EN_LABELS } from "@system-b90/command-palette/en";
 
-<CommandPaletteProvider labels={EN_LABELS} storageNamespace="peek-a-boo">
+<CommandPaletteProvider labels={EN_LABELS} storageNamespace="my-app">
     {children}
 </CommandPaletteProvider>;
 ```
@@ -89,7 +88,7 @@ import { HE_LABELS } from "@system-b90/command-palette/he";
 
 const LABELS = withLabelOverrides(HE_LABELS, { recents: "בשימוש תדיר" });
 
-<CommandPaletteProvider labels={LABELS} storageNamespace="bluz">
+<CommandPaletteProvider labels={LABELS} storageNamespace="my-app">
 ```
 
 A third language is just a `CommandPaletteLabels` object of your own — nothing
@@ -165,7 +164,7 @@ Yes, if **all** of these hold:
   syllabuses, no settings tabs.
 
 Otherwise it belongs in the host app alongside its own command contributions
-(in Bluz, that is `ui/src/components/app-commands/`).
+(e.g. an `app-commands/` folder).
 
 ## Notes
 
@@ -193,7 +192,7 @@ Otherwise it belongs in the host app alongside its own command contributions
 
 ```bash
 npm ci
-npm run lint        # ESLint, ported from Bluz's ui/eslint.config.mts
+npm run lint        # ESLint
 npm run typecheck   # tsc --noEmit
 npm test            # builds, then runs the core/ unit tests against dist/
 npm run docs:api    # regenerate docs/api/ with TypeDoc (gitignored)

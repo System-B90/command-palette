@@ -17,7 +17,7 @@ dependencies.
 | `npm run build` | `tsc` then `tsc-alias`. The second step is not optional — see below. |
 | `npm run clean` | Removes `dist/`. Run it after deleting or renaming a source file; `tsc` does not prune stale output. |
 | `npm run typecheck` | `tsc --noEmit`. |
-| `npm run lint` | ESLint, ported from Bluz's `ui/eslint.config.mts`. |
+| `npm run lint` | ESLint. |
 | `npm test` | Builds (via `pretest`), then runs the unit tests against `dist/`. |
 
 ## House rules
@@ -49,8 +49,8 @@ import from `dist/`, the same entry point consumers resolve, which is why
 `pretest` builds first.
 
 The React layer has no test harness in this repo. UI behaviour is covered by the
-consuming apps' E2E suites; Bluz's `tests/command-palette.spec.ts` is the
-reference. If you change dialog behaviour, run that suite against your branch.
+consuming apps' E2E suites. If you change dialog behaviour, run those suites
+against your branch.
 
 Add a test when you change scoring, normalisation, or anything in `core/`. The
 scoring constants are load-bearing and easy to nudge by accident.
@@ -90,7 +90,7 @@ and open a PR.
    deliberate act, not an automated one.
 2. Merge to `master`.
 3. Cut a GitHub Release. `publish.yml` builds and publishes.
-4. Bump the dependency in bluz, madash and peek-a-boo as each is ready.
+4. Bump the dependency in each consuming app as it is ready.
 
 Follow semver against the **public API** — the exports of `.`, `./core`, `./en`
 and `./he`, plus the ARIA contract in [Accessibility](accessibility.md). The DOM

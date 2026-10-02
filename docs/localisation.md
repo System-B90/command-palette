@@ -10,7 +10,7 @@ import { HE_LABELS } from "@system-b90/command-palette/he";
 Pick one, pass it as `labels`, done:
 
 ```tsx
-<CommandPaletteProvider labels={HE_LABELS} storageNamespace="bluz">
+<CommandPaletteProvider labels={HE_LABELS} storageNamespace="my-app">
 ```
 
 ## Only the language you import is built in

@@ -8,8 +8,7 @@ This file covers what's specific to command-palette.
 ## What command-palette is
 
 The shared VSCode-style command palette, published as
-`@system-b90/command-palette` to npm. Consumed by bluz, madash and
-peek-a-boo. Extracted from bluz's `ui/src/components/command-palette/`.
+`@system-b90/command-palette` to npm. Consumed by host apps.
 
 ## The one rule
 
@@ -32,7 +31,7 @@ asserts it against `dist/`; do not "simplify" it by re-exporting the tables from
 
 ## Imports
 
-Internal imports use the `@/*` alias (mirroring bluz), enforced by
+Internal imports use the `@/*` alias enforced by
 `no-restricted-imports`. `npm run build` runs `tsc-alias` after `tsc` to rewrite
 those specifiers to relative paths in `dist/` — without it the published package
 would not resolve. Keep the `.js` extension on every internal specifier; the
@@ -43,7 +42,7 @@ package is ESM.
 `tests/` covers `core/` only (registry, matcher, ranking, prefix parsing) and
 imports from `dist/`, not `src/`, so it exercises what actually ships — hence
 `pretest` builds. The React layer has no test harness here; UI behaviour is
-covered by the consuming apps' E2E suites (bluz's `tests/command-palette.spec.ts`).
+covered by the consuming apps' E2E suites.
 
 ## Docs
 

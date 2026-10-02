@@ -11,8 +11,7 @@ import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
 /*
- * Ported from Bluz's `ui/eslint.config.mts`, where this component grew up, so
- * the code keeps linting the same way after extraction.
+ * Lint config for the package.
  *
  * Deliberately dropped, because they are Next.js/app concerns this package
  * does not have: `eslint-config-next` (and its `next` settings block), the
@@ -20,7 +19,7 @@ import tseslint from "typescript-eslint";
  * `api-server/gantt/schema/**`.
  *
  * `no-restricted-imports` is kept in full, relative-path ban included, so the
- * package's own `@/*` alias mirrors Bluz's. That alias survives publication
+ * package's own `@/*` alias is enforced. That alias survives publication
  * because `build` runs `tsc-alias` after `tsc`, rewriting every `@/…` in the
  * emitted `.js`/`.d.ts` back to a relative specifier — consumers never see it.
  */
@@ -41,7 +40,7 @@ export default defineConfig([
         languageOptions: {
             // The palette talks to `window`/`document` directly (global
             // hotkeys, `localStorage` recents), which `no-undef` would
-            // otherwise flag — Bluz got these from `eslint-config-next`.
+            // otherwise flag.
             globals: globals.browser,
             parser: tseslint.parser,
             parserOptions: {

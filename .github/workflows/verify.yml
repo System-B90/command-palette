@@ -1,4 +1,4 @@
-# Ported from Bluz's release-pipeline `verify` job — the single-job shape is
+# The single-job shape is
 # deliberate: lint, typecheck and tests each get their own step with
 # `!cancelled()` so a lint failure still doesn't hide a test failure, but they
 # share one checkout and one `npm ci`.

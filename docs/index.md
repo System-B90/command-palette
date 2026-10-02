@@ -3,8 +3,7 @@
 `@system-b90/command-palette` is a VSCode-style quick-open surface for MUI
 applications: press ++ctrl+k++, type a few characters, hit ++enter++.
 
-It was extracted from Bluz, where it had been built to be liftable from the
-start, and is now shared by **bluz**, **madash** and **peek-a-boo**.
+It was built to be liftable from its first host app and is shared by several apps.
 
 ## What it gives you
 

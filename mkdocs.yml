@@ -1,5 +1,4 @@
-# Mirrors Bluz's mkdocs setup so the docs read the same across the org. The
-# TypeDoc plugin regenerates `docs/api/` from the TSDoc comments in `src/` at
+# The TypeDoc plugin regenerates `docs/api/` from the TSDoc comments in `src/` at
 # build time — that directory is generated, never edited by hand.
 site_name: Command Palette
 site_description: VSCode-style command palette for MUI apps — shared across System-B90 front-ends.
@@ -84,5 +83,4 @@ nav:
       - Architecture: architecture.md
       - API Reference: api/index.md
   - Project:
-      - Migrating from Bluz: migration.md
       - Contributing: contributing.md
