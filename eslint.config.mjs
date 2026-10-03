@@ -1,10 +1,10 @@
+import eslintReact from "@eslint-react/eslint-plugin";
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
-import importPlugin from "eslint-plugin-import";
+import { importX } from "eslint-plugin-import-x";
 import perfectionist from "eslint-plugin-perfectionist";
-import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import unicorn from "eslint-plugin-unicorn";
 import unusedImports from "eslint-plugin-unused-imports";
@@ -30,10 +30,10 @@ export default defineConfig([
         plugins: {
             "@typescript-eslint": tseslint.plugin,
             "@stylistic": stylistic,
-            import: importPlugin,
+            "import-x": importX,
             "unused-imports": unusedImports,
             perfectionist: perfectionist,
-            react: reactPlugin,
+            "@eslint-react": eslintReact,
             "react-hooks": reactHooks,
             unicorn: unicorn,
         },
@@ -49,9 +49,6 @@ export default defineConfig([
                 },
                 tsconfigRootDir: import.meta.dirname,
             },
-        },
-        settings: {
-            react: { version: "detect" },
         },
         rules: {
             "eol-last": ["error", "always"],
@@ -87,8 +84,8 @@ export default defineConfig([
             ],
 
             // --- Exports & Imports ---
-            "import/no-default-export": "error",
-            "import/no-cycle": "error",
+            "import-x/no-default-export": "error",
+            "import-x/no-cycle": "error",
             "unused-imports/no-unused-imports": "error",
             "no-restricted-imports": [
                 "error",
@@ -107,7 +104,7 @@ export default defineConfig([
                     ],
                 },
             ],
-            "import/order": [
+            "import-x/order": [
                 "error",
                 {
                     groups: [
@@ -128,10 +125,7 @@ export default defineConfig([
             ],
 
             // --- React & Perfectionist ---
-            "react/jsx-no-leaked-render": [
-                "error",
-                { validStrategies: ["ternary", "coerce"] },
-            ],
+            "@eslint-react/no-leaked-conditional-rendering": "error",
             "react-hooks/rules-of-hooks": "error",
             "react-hooks/exhaustive-deps": "warn",
             "perfectionist/sort-variable-declarations": [
