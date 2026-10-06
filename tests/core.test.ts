@@ -62,6 +62,27 @@ describe("matchText", () => {
         assert.ok(prefix > scattered);
     });
 
+    test("a defective spelling finds its full spelling (ktiv male)", () => {
+        const full = matchText("שבץ", "שיבוצים");
+        const scattered = matchText("שבץ", "לשבת עם א' מקצוע קודמים");
+        assert.ok(full.score > scattered.score);
+        assert.deepEqual(full.indices, [0, 2, 4]);
+        assert.ok(matchText("תכנן", "תכנון").score > 0);
+    });
+
+    test("an exact spelling outranks a vowel-letter-folded one", () => {
+        assert.ok(
+            matchText("תכנון", "תכנון").score > matchText("תכנן", "תכנון").score,
+        );
+    });
+
+    test("a subsequence inside one word beats one spread across words", () => {
+        const oneWord = matchText("acd", "xx abcd");
+        const spread = matchText("acd", "a b c d");
+        assert.ok(oneWord.score > spread.score);
+        assert.deepEqual(oneWord.indices, [3, 5, 6]);
+    });
+
     test("matches Hebrew text past its niqqud", () => {
         assert.ok(matchText("בית", 'בֵּית"ר').score > 0);
     });
